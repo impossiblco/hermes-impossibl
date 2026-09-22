@@ -1,0 +1,18 @@
+name: test
+on:
+  push:
+  pull_request:
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch a hermes-agent checkout (provider discovery only)
+        run: |
+          git clone --depth 1 --filter=blob:none --sparse https://github.com/NousResearch/hermes-agent.git /tmp/hermes-agent
+          cd /tmp/hermes-agent && git sparse-checkout set --cone providers plugins/model-providers hermes_cli
+      - run: pip install pytest pyyaml
+      - run: PYTHONPATH=/tmp/hermes-agent pytest -q

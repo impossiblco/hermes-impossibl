@@ -1,0 +1,8 @@
+name: hermes-impossibl
+kind: model-provider
+version: 1.0.0
+description: Impossibl — one OpenAI-compatible API for 100+ models from every major lab
+author: Impossibl
+homepage: https://github.com/impossiblco/hermes-impossibl
+requires_env:
+  - IMPOSSIBL_API_KEY
