@@ -56,8 +56,7 @@ The plugin adds the picker entry, aliases, `hermes doctor` checks, a chat-only m
 ## Development
 
 ```bash
-git clone --depth 1 --filter=blob:none --sparse https://github.com/NousResearch/hermes-agent.git /tmp/hermes-agent
-(cd /tmp/hermes-agent && git sparse-checkout set --cone providers plugins/model-providers hermes_cli)
+git clone --depth 1 https://github.com/NousResearch/hermes-agent.git /tmp/hermes-agent
 pip install pytest pyyaml
 PYTHONPATH=/tmp/hermes-agent pytest -q
 ```

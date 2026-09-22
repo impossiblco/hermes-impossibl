@@ -10,9 +10,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Fetch a hermes-agent checkout (provider discovery only)
-        run: |
-          git clone --depth 1 --filter=blob:none --sparse https://github.com/NousResearch/hermes-agent.git /tmp/hermes-agent
-          cd /tmp/hermes-agent && git sparse-checkout set --cone providers plugins/model-providers hermes_cli
+      # A full shallow checkout: provider discovery reaches into top-level packages
+      # (hermes_constants -> hermes_platform), so a sparse set silently breaks it.
+      - name: Fetch a hermes-agent checkout
+        run: git clone --depth 1 https://github.com/NousResearch/hermes-agent.git /tmp/hermes-agent
       - run: pip install pytest pyyaml
       - run: PYTHONPATH=/tmp/hermes-agent pytest -q
